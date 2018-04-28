@@ -8,7 +8,11 @@ public class SpellingQuizStreamHandler extends SkillStreamHandler {
 
     private static Skill getSkill() {
         return Skills.standard()
-                .addRequestHandlers(new CancelandStopIntentHandler(), new HelpIntentHandler(), new LaunchRequestHandler(), new SessionEndedRequestHandler())
+                .addRequestHandlers(new CancelandStopIntentHandler(),
+                        new HelpIntentHandler(),
+                        new LaunchRequestHandler(),
+                        new SessionEndedRequestHandler(),
+                        new AnswerIntentHandler())
                 .build();
     }
 
