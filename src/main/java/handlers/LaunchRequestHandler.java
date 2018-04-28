@@ -9,14 +9,17 @@ import enums.Dictionary;
 import utils.DictionaryUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LaunchRequestHandler implements RequestHandler {
 
-    private ArrayList<Dictionary> dictionary;
+    private ArrayList<String> dictionary;
     private Map<String, Object> attributesMap;
 
     public LaunchRequestHandler() {
-        dictionary = new ArrayList<>(Arrays.asList(Dictionary.values()));
+        dictionary = (ArrayList<String>) Arrays.stream(Dictionary.values())
+                .map(Enum::name)
+                .collect(Collectors.toList());
         attributesMap = new HashMap<>();
     }
 
