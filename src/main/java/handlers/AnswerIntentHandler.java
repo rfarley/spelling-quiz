@@ -35,7 +35,14 @@ public class AnswerIntentHandler implements RequestHandler {
         //Get the user's answer
         Slot answerSlot = slots.get("answers");
         String answer = answerSlot.getValue();
-        answer = answer.replaceAll("[^A-Za-z]", "");
+        if (answer != null) {
+            answer = answer.replaceAll("[^A-Za-z]", "");
+        } else {
+            return input.getResponseBuilder()
+                    .withSpeech("That is not a valid response.  Try again. The word is. " + currentWord)
+                    .withReprompt("The word is. "+ currentWord)
+                    .build();
+        }
         String speechText = "You said: " + answer.replaceAll("", ".") + ". ";
         String answerWord = answer.replaceAll(" ", "").toUpperCase();
 
@@ -57,7 +64,7 @@ public class AnswerIntentHandler implements RequestHandler {
             attributesMap.put("CURRENT_WORD", currentWord);
             attributesMap.put("DICTIONARY", dictionary);
             input.getAttributesManager().setSessionAttributes(attributesMap);
-            speechText += "The next word is " + currentWord;
+            speechText += "The next word is. " + currentWord;
         }
 
         return input.getResponseBuilder()

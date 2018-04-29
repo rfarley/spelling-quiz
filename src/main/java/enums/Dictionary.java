@@ -6,7 +6,7 @@ public enum Dictionary {
     POSTPONE,
     AUTOMATION,
     ABERRANT,
-    AUTONOMOUS,
+    AUTOMATON,
     POSTHUMOUS,
     ERRATIC,
     AUTOGRAPH,
