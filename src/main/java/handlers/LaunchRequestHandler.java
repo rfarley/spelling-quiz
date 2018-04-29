@@ -5,21 +5,15 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.request.Predicates;
-import enums.Dictionary;
 import utils.DictionaryUtils;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LaunchRequestHandler implements RequestHandler {
 
-    private ArrayList<String> dictionary;
     private Map<String, Object> attributesMap;
 
     public LaunchRequestHandler() {
-        dictionary = (ArrayList<String>) Arrays.stream(Dictionary.values())
-                .map(Enum::name)
-                .collect(Collectors.toList());
         attributesMap = new HashMap<>();
     }
 
@@ -30,7 +24,8 @@ public class LaunchRequestHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "Welcome to Spelling Quiz.  Let's get started. ";
+        ArrayList<String> dictionary = DictionaryUtils.buildDictionary();
+        String speechText = "Welcome to Spelling Trainer.  Let's get started. ";
         String firstWord = DictionaryUtils.getWord(dictionary);
         String firstPrompt = "The first word is. " + firstWord;
         attributesMap.put("DICTIONARY", dictionary);
@@ -38,7 +33,7 @@ public class LaunchRequestHandler implements RequestHandler {
         input.getAttributesManager().setSessionAttributes(attributesMap);
         return input.getResponseBuilder()
                 .withSpeech(speechText + firstPrompt)
-                .withReprompt(speechText)
+                .withReprompt(firstPrompt)
                 .build();
     }
 

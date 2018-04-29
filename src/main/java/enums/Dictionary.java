@@ -1,7 +1,16 @@
 package enums;
 
 public enum Dictionary {
-    CAT,
-    DOG,
-    HAT
+    CONTROVERSY,
+    SEMIANNUAL,
+    POSTPONE,
+    AUTOMATION,
+    ABERRANT,
+    AUTONOMOUS,
+    POSTHUMOUS,
+    ERRATIC,
+    AUTOGRAPH,
+    CONTRABAND,
+    SEMIPRECIOUS,
+    ERRONEOUS
 }

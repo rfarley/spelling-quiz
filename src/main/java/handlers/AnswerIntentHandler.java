@@ -35,8 +35,8 @@ public class AnswerIntentHandler implements RequestHandler {
         //Get the user's answer
         Slot answerSlot = slots.get("answers");
         String answer = answerSlot.getValue();
-
-        String speechText = "You said: " + answer.replaceAll(" ", ".") + ". ";
+        answer = answer.replaceAll("[^A-Za-z]", "");
+        String speechText = "You said: " + answer.replaceAll("", ".") + ". ";
         String answerWord = answer.replaceAll(" ", "").toUpperCase();
 
         if (answerWord.equals(currentWord)) {
@@ -46,7 +46,7 @@ public class AnswerIntentHandler implements RequestHandler {
         }
 
         //Get the next word or end the session
-        if (dictionary.size() == 0) {
+        if (dictionary == null || dictionary.size() == 0) {
             speechText += "You have finished all words.  Goodbye.";
             return input.getResponseBuilder()
                     .withSpeech(speechText)
