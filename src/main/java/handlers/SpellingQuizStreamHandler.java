@@ -12,7 +12,8 @@ public class SpellingQuizStreamHandler extends SkillStreamHandler {
                         new HelpIntentHandler(),
                         new LaunchRequestHandler(),
                         new SessionEndedRequestHandler(),
-                        new AnswerIntentHandler())
+                        new AnswerIntentHandler(),
+                        new RepeatIntentHandler())
                 .build();
     }
 
